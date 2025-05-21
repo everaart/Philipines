@@ -10,8 +10,11 @@
       font-family: 'Segoe UI', sans-serif;
       color: white;
       text-align: center;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-image 1s ease-in-out;
     }
 
     .overlay {
@@ -48,10 +51,23 @@
   </div>
 
   <script>
-    const holidayDate = new Date("2025-10-11T16:20:00");
+    const backgrounds = [
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', // Beach
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb', // Sunset
+      'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d', // Airplane wing
+      'https://images.unsplash.com/photo-1504198453319-5ce911bafcde', // Ocean view
+      'https://images.unsplash.com/photo-1473625247510-8ceb1760943f'  // Tropical road
+    ];
+
+    function setHourlyBackground() {
+      const hour = new Date().getHours();
+      const index = hour % backgrounds.length;
+      document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+    }
 
     function updateCountdown() {
       const now = new Date();
+      const holidayDate = new Date("2025-10-11T16:20:00");
       const timeLeft = holidayDate - now;
 
       if (timeLeft <= 0) {
@@ -68,8 +84,11 @@
         `${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec`;
     }
 
+    // Initialize
+    setHourlyBackground();
     updateCountdown();
     setInterval(updateCountdown, 1000);
+    setInterval(setHourlyBackground, 60 * 60 * 1000); // Check every hour
   </script>
 </body>
 </html>
