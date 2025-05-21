@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Holiday Countdown</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f8ff;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    #countdown {
+      font-size: 2.5em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Countdown to Holiday</h1>
+  <div id="countdown">Loading...</div>
+
+  <script>
+    const holidayDate = new Date("2025-10-11T16:20:00"); // Set your holiday date
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeLeft = holidayDate - now;
+
+      if (timeLeft <= 0) {
+        document.getElementById("countdown").innerText = "🎉 It's Holiday Time! 🎉";
+        return;
+      }
+
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      document.getElementById("countdown").innerText = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
