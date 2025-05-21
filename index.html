@@ -60,6 +60,26 @@
         opacity: 0;
       }
     }
+
+    @keyframes shakeScreen {
+      0% { transform: translate(0px, 0px); }
+      25% { transform: translate(5px, -5px); }
+      50% { transform: translate(-5px, 5px); }
+      75% { transform: translate(5px, 5px); }
+      100% { transform: translate(-5px, -5px); }
+    }
+
+    #chaosButton {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 1em 2em;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-radius: 10px;
+      box-shadow: 0 0 20px yellow;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -69,7 +89,12 @@
     <div id="countdown">Loading...</div>
   </div>
 
-  <!-- 🎉 Confetti JS from CDN -->
+  <!-- Button -->
+  <div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+    <button id="chaosButton">DO NOT PRESS THIS BUTTON</button>
+  </div>
+
+  <!-- Confetti JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
@@ -94,7 +119,7 @@
         `${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec`;
     }
 
-    // 🎊 Confetti
+    // Confetti burst
     function launchConfetti() {
       confetti({
         particleCount: 150,
@@ -104,9 +129,9 @@
     }
 
     setInterval(updateCountdown, 1000);
-    setInterval(launchConfetti, 5000); // every 5 seconds
+    setInterval(launchConfetti, 5000);
 
-    // 🛫 Flying Emojis
+    // Emoji chaos
     const emojis = ["✈️", "🌴", "🥥", "🏖️", "😎"];
     function createEmoji() {
       const emoji = document.createElement("div");
@@ -117,7 +142,31 @@
       document.body.appendChild(emoji);
       setTimeout(() => emoji.remove(), 8000);
     }
-    setInterval(createEmoji, 600); // one every ~0.6 sec
+
+    setInterval(createEmoji, 600); // Flying emojis
+
+    // Chaos button
+    const chaosButton = document.getElementById("chaosButton");
+    chaosButton.addEventListener("click", () => {
+      // Massive confetti
+      confetti({
+        particleCount: 300,
+        spread: 160,
+        startVelocity: 60,
+        origin: { y: 0.6 }
+      });
+
+      // Shake the screen
+      document.body.style.animation = "shakeScreen 0.5s";
+      setTimeout(() => {
+        document.body.style.animation = "";
+      }, 500);
+
+      // Burst of emojis
+      for (let i = 0; i < 25; i++) {
+        createEmoji();
+      }
+    });
   </script>
 </body>
 </html>
