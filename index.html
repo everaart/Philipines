@@ -7,18 +7,15 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       color: white;
       text-align: center;
+      background: url('https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2RrdHdqOWM0NXVlNWQzNXN5MGY3eG5yOWpsbWJjNjI5aWd3a2RkcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7ZKpmNlwNnHWM/giphy.gif') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      transition: background-image 1s ease-in-out;
     }
 
     .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.5);
       position: absolute;
       top: 0;
       left: 0;
@@ -35,39 +32,36 @@
     h1 {
       font-size: 3em;
       margin-bottom: 20px;
+      text-transform: uppercase;
+      animation: shake 1.5s infinite;
     }
 
     #countdown {
       font-size: 2.5em;
       font-weight: bold;
     }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      25% { transform: translate(-2px, 2px) rotate(-1deg); }
+      50% { transform: translate(2px, -1px) rotate(1deg); }
+      75% { transform: translate(-1px, 1px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
   </style>
 </head>
 <body>
   <div class="overlay"></div>
   <div class="content">
-    <h1>🇵🇭 Countdown to Philippines – Oct 11, 2025 @ 16:20 🌅</h1>
+    <h1>Countdown to Philippines – Oct 11, 2025 @ 16:20</h1>
     <div id="countdown">Loading...</div>
   </div>
 
   <script>
-    const backgrounds = [
-      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e', // Beach
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb', // Sunset
-      'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d', // Airplane wing
-      'https://images.unsplash.com/photo-1504198453319-5ce911bafcde', // Ocean view
-      'https://images.unsplash.com/photo-1473625247510-8ceb1760943f'  // Tropical road
-    ];
-
-    function setHourlyBackground() {
-      const hour = new Date().getHours();
-      const index = hour % backgrounds.length;
-      document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
-    }
+    const holidayDate = new Date("2025-10-11T16:20:00");
 
     function updateCountdown() {
       const now = new Date();
-      const holidayDate = new Date("2025-10-11T16:20:00");
       const timeLeft = holidayDate - now;
 
       if (timeLeft <= 0) {
@@ -84,11 +78,8 @@
         `${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec`;
     }
 
-    // Initialize
-    setHourlyBackground();
     updateCountdown();
     setInterval(updateCountdown, 1000);
-    setInterval(setHourlyBackground, 60 * 60 * 1000); // Check every hour
   </script>
 </body>
 </html>
