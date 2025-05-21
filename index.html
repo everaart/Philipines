@@ -2,30 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Holiday Countdown</title>
+  <title>Philippines Holiday Countdown</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
       text-align: center;
-      padding: 50px;
-      background-color: #f0f8ff;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+      background-size: cover;
     }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding-top: 20%;
+    }
+
     h1 {
       font-size: 3em;
       margin-bottom: 20px;
     }
+
     #countdown {
       font-size: 2.5em;
-      color: #333;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Countdown to Holiday</h1>
-  <div id="countdown">Loading...</div>
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>🇵🇭 Countdown to Philippines – Oct 11, 2025 @ 16:20 🌅</h1>
+    <div id="countdown">Loading...</div>
+  </div>
 
   <script>
-    const holidayDate = new Date("2025-10-11T16:20:00"); // Set your holiday date
+    const holidayDate = new Date("2025-10-11T16:20:00");
 
     function updateCountdown() {
       const now = new Date();
@@ -42,7 +65,7 @@
       const seconds = Math.floor((timeLeft / 1000) % 60);
 
       document.getElementById("countdown").innerText = 
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        `${days} days, ${hours} hrs, ${minutes} min, ${seconds} sec`;
     }
 
     updateCountdown();
